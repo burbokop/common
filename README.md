@@ -17,7 +17,7 @@ $ npm install metarhia-common
 ### Split array into two parts
 `common.splitAt(index, array)`
   - `index:number` - index defining end of first part and start of second
-  - `array` - array
+  - `array` - array, to be splitted
 
 Returns: tuple with two parts of the array
 
@@ -36,7 +36,8 @@ Returns: array
 Returns: array
 
 Example:
-```js `range(1, 5) = [1, 2, 3, 4, 5]`
+```js
+ `range(1, 5) = [1, 2, 3, 4, 5]`
 ```
 
 
@@ -49,9 +50,25 @@ Returns: array
 
 Example:
 ```js
+
 list: sequence([81, 82, 83]) = [81, 82, 83]
+```
+
+Example:
+```js
+
 range from..to: sequence([81,,83]) = [81, 82, 83]
+```
+
+Example:
+```js
+
 range from..count: sequence([81, [3]]) = [81, 82, 83]
+```
+
+Example:
+```js
+
 range from..max-to: sequence([81, [-2]], 5) = [81, 82, 83]
 ```
 
@@ -63,14 +80,10 @@ range from..max-to: sequence([81, [-2]], 5) = [81, 82, 83]
 Returns: element
 
 
-### Extend Map interface with:
+### Create Cache, enhanced Map
 `common.cache()`
 
-`cache.allocated` - total allocated size
-`cache.add(key, val)` - add record
-`cache.del(key)` - delete record
-`cache.clr(prefix, fn)` - delete all if `key.startsWith(prefix)`
-Returns: object, cache instance
+Returns: Cache instance
 
 
 ### Empty function
@@ -113,36 +126,36 @@ Returns: function, wrapped callback
 `common.unsafeCallback(args)`
 
 It's unsafe: may return null, allows multiple calls
-  - `args` - array
+  - `args` - array, arguments
 
 Returns: function, callback or null
 
-Hint: previous name: `common.cbUnsafe` (deprecated)
-
-Hint: another alias: `common.extractCallback` (deprecated)
+Deprecated: previous names: `common.cbUnsafe`, `common.extractCallback`
 
 
 ### Extract callback
 `common.safeCallback(args)`
-  - `args` - array
+  - `args` - array, arguments
 
-Returns: function, wrapped callback or common.emptiness if there is no one
+Returns: function, callback or common.emptiness if there is no callback
 
-Hint: previous name: `cbExtract` (deprecated)
+Deprecated: previous name: `common.cbExtract`
 
 
 ### Extract callback
 `common.requiredCallback(args)`
-  - `args` - array
+  - `args` - array, arguments
 
-Returns: function or throw TypeError if there is no callback
+Returns: function, extracted callback
+
+Throws: TypeError, if there is no callback
 
 
 ### Extract callback and make it safe
 `common.onceCallback(args)`
 
 Wrap callback with once()
-  - `args` - array
+  - `args` - array, arguments
 
 Returns: function, callback or common.emptiness if there is no callback
 
@@ -156,7 +169,7 @@ Returns: boolean
 
 ### Copy dataset (copy objects to new array)
 `common.copy(ds)`
-  - `ds` - array of objects
+  - `ds` - array of objects, source dataset to be copied
 
 Returns: array of objects
 
@@ -180,14 +193,14 @@ Returns: object or array
   - `data:object`
   - `dataPath:string` - dot-separated path
 
-Returns: value
+Returns: any type, value
 
 
 ### Set property by dot-separated path
 `common.setByPath(data, dataPath, value)`
   - `data:object`
   - `dataPath:string` - dot-separated path
-  - `value` - new value
+  - `value` - any type, new value
 
 
 ### Delete property by dot-separated path
@@ -199,40 +212,44 @@ Returns: boolean
 
 
 ### Distinctly merge multiple arrays
-`common.merge(args)`
-  - `args` - array of arrays with elements to merge
+`common.merge(...args)`
+  - `...args` - array, arrays with elements to be merged
 
 Returns: array
 
 
 ### Merge multiple objects with merger
-`common.mergeObjects(merger, objs)`
+`common.mergeObjects(merger, ...objs)`
   - `merger:function`
-  - `objs` - array of objects
+  - `...objs` - array, objects to be merged
 
 Returns: object
 
 
 ### Forward events from one EventEmitter to another
 `common.forwardEvents(from, to, events)`
-  - `from` - EventEmitter
-  - `to` - EventEmitter
-  - `events` - array of strings
+  - `from` - EventEmitter, to listen for event
+  - `to` - EventEmitter, to emit event on
+  - `events` - array of strings, string or object, events names
 
 Example:
-```js common.forwardEvent(from, to);
+```js
+ common.forwardEvent(from, to);
 ```
 
 Example:
-```js common.forwardEvent(from, to, 'eventName');
+```js
+ common.forwardEvent(from, to, 'eventName');
 ```
 
 Example:
-```js common.forwardEvent(from, to, { eventName: 'newEventName' });
+```js
+ common.forwardEvent(from, to, { eventName: 'newEventName' });
 ```
 
 Example:
-```js common.forwardEvent(from, to, ['eventName1', 'eventName2']);
+```js
+ common.forwardEvent(from, to, ['eventName1', 'eventName2']);
 ```
 
 
@@ -243,28 +260,28 @@ Returns: EventEmitter, instance
 
 
 ### Partially apply arguments to function
-`common.partial(fn, args)`
+`common.partial(fn, ...args)`
   - `fn:function`
-  - `args` - array
+  - `...args` - array, arguments to be applied
 
-Returns: function
-  rest - arguments
+Returns: function(...rest)
+  ...rest - arguments
 
 
 ### Map object fields with provided function
 `common.omap(mapFn, obj)`
-  - `mapFn` - funtion
+  - `mapFn:function` - to apply to every field value
   - `obj:object` - which fields used for mapping
 
 Returns: object, with same reference but with transformed fields
 
 
 ### Compose multiple functions into one
-`common.compose(fns)`
-  - `fns` - array of functions
+`common.compose(...fns)`
+  - `...fns` - array, functions to be composed
 
-Returns: function, composed
-  args - arguments to be passed to first function
+Returns: function(...args), composed
+  ...args - array, arguments to be passed to the first function
 
 
 ### Apply given function to value or default value
@@ -277,11 +294,11 @@ Returns: result of `fn` or `defVal`
 
 
 ### Zip several arrays into one
-`common.zip(arrays)`
-  - `arrays` - array of arrays,
+`common.zip(...arrays)`
+  - `...arrays` - array, arrays to be zipped
 
-Returns: array, length is minimal of input arrays length
-Element with index i of resulting array is array with
+Returns: array, length is minimal of input arrays length,
+element with index i of resulting array is array with
 elements with index i from input arrays
 
 
@@ -294,71 +311,74 @@ Returns: array, replicated
 
 
 ### Zip arrays using specific function
-`common.zipWith(fn, arrays)`
+`common.zipWith(fn, ...arrays)`
   - `fn:function` - for zipping elements with index i
-  - `arrays` - array of arrays
+  - `...arrays` - array, arrays to be zipped
 
-Returns: array
-Element with index i of resulting array is result
+Returns: array, zipped, element with index i of resulting array is result
 of fn called with arguments from arrays
 
 
 ### Curry function until the condition is met
-`common.curryUntil(condition, fn, args)`
-  - `condition:function` - (argsI, argsParts) returns boolean
-argsI is arguments for i-th currying
-argsParts is array of args given for currying from first to i-th currying
+`common.curryUntil(condition, fn, ...args)`
+  - `condition:function` - function(argsI, argsParts) returns boolean
+    - `argsI` - arguments for i-th currying
+    - `argsParts` - array of args given for currying from first to i-th currying
   - `fn:function` - which will be curried
-  - `args` - array
+  - `...args` - array, arguments for fn
 
-Returns: function, curried
+Returns: function(...args), curried
+  ...args - array, arguments
 
 
 ### Curry fn count times, first curry uses args for first currying
-`common.curryN(fn, count, args)`
+`common.curryN(fn, count, ...args)`
   - `fn:function` - curried
   - `count:number` - of times function should be curried
-  - `args` - array
+  - `...args` - array, arguments for first currying
 
 Returns: function, curried given times count
 
 
 ### Curry function curry with fn
-`common.curryTwice()`
- - `fn:function` - to be curried
+`common.curryTwice(fn)`
+  - `fn:function` - to be curried
 
 Returns: function, to pass arguments that returns curried fn
 
 
 ### Curry function with given arguments
-`common.curry(fn, args)`
-  - `fn:function`
-  - `args` - array
+`common.curry(fn, ...args)`
+  - `fn:function` - to be curried
+  - `...args` - array, arguments
 
 Returns: function, curried
 
 
 ### Apply arguments
-`common.applyArgs(args)`
-  - `args` - array
+`common.applyArgs(...args)`
+  - `...args` - array, arguments to save in closure
 
-Returns: function, to pass (fn) arguments will be applied
+Returns: function, to be applied saved arguments
+  ...args - array, arguments saved in closure
 
 
 ### Get first not errored result of fn
 `common.either(fn)`
   - `fn:function` - to be called
 
-Returns: result of `fn`
-  args - arguments to iterate
+Returns: result of `fn(...args)`
+  ...args - array, arguments to iterate
+
+Throws: Error, if `fn` throws it
 
 
 ### Rest left, transform function
 `common.restLeft(fn)`
-  - `fn:function` - (args, arg1..argN, callback)
+  - `fn:function` - function(args, arg1..argN, callback)
 
-Returns: function, (arg1..argN, ...args, callback)
-  spreadArgs - arguments
+Returns: function(arg1..argN, ...args, callback)
+  ...spreadArgs - array, arguments to be added
 
 
 ### Generate random key
@@ -377,14 +397,14 @@ Returns: string, GUID
 
 ### Generate random SID
 `common.generateSID(config)`
-  - `config` - record
+  - `config` - record, { length, characters, secret }
 
 Returns: string, SID
 
 
 ### Calculate SID CRC
 `common.crcSID(config, key)`
-  - `config` - record
+  - `config` - record, { secret }
   - `key:string` - SID key
 
 Returns: string, CRC
@@ -392,7 +412,7 @@ Returns: string, CRC
 
 ### Validate SID
 `common.validateSID(config, sid)`
-  - `config` - record
+  - `config` - record, { secret }
   - `sid:string` - session id
 
 Returns: boolean
@@ -418,7 +438,7 @@ Returns: boolean
 ### Generate file storage key
 `common.generateStorageKey()`
 
-Returns: Array of string, [folder1, folder2, code]
+Returns: array of strings, [folder1, folder2, code]
 
 
 ### Convert id to array of hex strings
@@ -426,6 +446,7 @@ Returns: Array of string, [folder1, folder2, code]
   - `id:number`
 
 Returns: array, minimal length is 2
+Contains hex strings with length of 4
 
 
 ### Convert id to file path
@@ -478,7 +499,7 @@ Returns: array of strings, method names
 `common.properties(iface)`
   - `iface:object` - to be introspected
 
-Returns: array of string, property names
+Returns: array of strings, property names
 
 
 ### Convert IP string to number
@@ -523,7 +544,8 @@ Hint: Previous function will be accessible by obj.fnName.inherited
 Returns: number
 
 Example:
-```js files.sort(common.sortComparePriority)
+```js
+ files.sort(common.sortComparePriority)
 ```
 
 
@@ -534,7 +556,8 @@ Example:
 Returns: number
 
 Example:
-```js files.sort(sortCompareDirectories);
+```js
+ files.sort(sortCompareDirectories);
 ```
 
 
@@ -545,14 +568,15 @@ Example:
 Returns: number
 
 Example:
-```js files.sort(sortCompareByName)
+```js
+ files.sort(sortCompareByName)
 ```
 
 
 ### Substitute variables
 `common.subst(tpl, data, dataPath, escapeHtml)`
   - `tpl:string` - template body
-  - `data` - hash
+  - `data` - hash, data structure to visualize
   - `dataPath:string` - current position in data structure
   - `escapeHtml:boolean` - escape html special characters if true
 
@@ -566,7 +590,8 @@ Returns: string
 Returns: string
 
 Example:
-```js htmlEscape('5>=5') = '5&lt;=5'
+```js
+ htmlEscape('5>=5') = '5&lt;=5'
 ```
 
 
@@ -577,11 +602,13 @@ Example:
 Returns: string
 
 Example:
-```js fileExt('/dir/file.txt')
+```js
+ fileExt('/dir/file.txt')
 ```
 
 Result:
-```js 'txt'
+```js
+ 'txt'
 ```
 
 
@@ -592,11 +619,13 @@ Result:
 Returns: string
 
 Example:
-```js fileExt('file.txt')
+```js
+ fileExt('file.txt')
 ```
 
 Result:
-```js 'file'
+```js
+ 'file'
 ```
 
 
@@ -614,7 +643,8 @@ Returns: string
 Returns: string
 
 Example:
-```js escapeRegExp('/path/to/res?search=this.that')
+```js
+ escapeRegExp('/path/to/res?search=this.that')
 ```
 
 
@@ -676,7 +706,8 @@ Returns: string
 Returns: RegExp, instance
 
 Example:
-```js ['/css/*', '/index.html']
+```js
+ ['/css/*', '/index.html']
 ```
 
 
@@ -688,11 +719,13 @@ Example:
 Returns: array of strings
 
 Example:
-```js rsection('All you need is JavaScript', 'is')
+```js
+ rsection('All you need is JavaScript', 'is')
 ```
 
 Result:
-```js ['All you need ', ' JavaScript']
+```js
+ ['All you need ', ' JavaScript']
 ```
 
 
@@ -704,11 +737,13 @@ Result:
 Returns: array of strings
 
 Example:
-```js rsection('All you need is JavaScript', 'a')
+```js
+ rsection('All you need is JavaScript', 'a')
 ```
 
 Result:
-```js ['All you need is Jav', 'Script']
+```js
+ ['All you need is Jav', 'Script']
 ```
 
 
@@ -721,19 +756,23 @@ Result:
 Returns: array of strings
 
 Example:
-```js split('a,b,c,d')
+```js
+ split('a,b,c,d')
 ```
 
 Result:
-```js ['a', 'b', 'c', 'd']
+```js
+ ['a', 'b', 'c', 'd']
 ```
 
 Example:
-```js split('a,b,c,d', ',', 2)
+```js
+ split('a,b,c,d', ',', 2)
 ```
 
 Result:
-```js ['a', 'b']
+```js
+ ['a', 'b']
 ```
 
 
@@ -746,11 +785,13 @@ Result:
 Returns: array of strings
 
 Example:
-```js split('a,b,c,d', ',', 2)
+```js
+ split('a,b,c,d', ',', 2)
 ```
 
 Result:
-```js ['c', 'd']
+```js
+ ['c', 'd']
 ```
 
 
@@ -762,20 +803,21 @@ Result:
 Returns: boolean
 
 Example:
-```js isTimeEqual(sinceTime, buffer.stats.mtime)
+```js
+ isTimeEqual(sinceTime, buffer.stats.mtime)
 ```
 
 
 ### Get current date in YYYY-MM-DD format
 `common.nowDate(date)`
-  - `date` - Date (optional)
+  - `date` - Date (optional), default: new Date()
 
 Returns: string
 
 
 ### Get current date in YYYY-MM-DD hh:mm format
 `common.nowDateTime(date)`
-  - `date` - Date (optional)
+  - `date` - Date (optional), default: new Date()
 
 Returns: string
 
@@ -787,7 +829,8 @@ Returns: string
 Returns: number, milliseconds
 
 Example:
-```js duration('1d 10h 7m 13s')
+```js
+ duration('1d 10h 7m 13s')
 ```
 
 
@@ -814,16 +857,18 @@ Returns: number
 
 ### Wrap method to mark it as deprecated
 `common.deprecate(fn)`
-  - `fn:function (optional)`
+  - `fn:function`
 
-Returns: function, wrapped with deprecation warning
+Returns: function(...args), wrapped with deprecation warning
+  ...args - array, arguments to be passed to wrapped funtion
 
 
 ### Wrap new method to mark old alias as deprecated
 `common.alias(fn)`
-  - `fn:function (optional)`
+  - `fn:function`
 
-Returns: function, wrapped with deprecation warning
+Returns: function,  function(...args), wrapped with deprecation warning
+  ...args - array, arguments to be passed to wrapped function
 
 
 ### Make function raise-safe
@@ -831,7 +876,7 @@ Returns: function, wrapped with deprecation warning
   - `fn:function`
 
 Returns: function, wrapped with try/catch interception
-  args - arguments
+  ...args - array, arguments to be passed to wrapped function
 
 ## Contributors
 
