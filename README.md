@@ -375,7 +375,7 @@ Throws: Error, if `fn` throws it
   - `fn:function` - function(args, ...namedArgs, callback)
     - `args` - array, rest of spreadArgs created by excluding namedArgs
     - `namedArgs` - array, first values of spreadArgs,
-        length is based upon interface of fn
+                    length is based upon interface of fn
     - `callback:function` - callback, last argument of spreadArgs
 
 Returns: function(...spreadArgs)
