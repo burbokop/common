@@ -130,16 +130,12 @@ It's unsafe: may return null, allows multiple calls
 
 Returns: function, callback or null
 
-Deprecated: previous names: `common.cbUnsafe`, `common.extractCallback`
-
 
 ### Extract callback
 `common.safeCallback(args)`
   - `args` - array, arguments
 
 Returns: function, callback or common.emptiness if there is no callback
-
-Deprecated: previous name: `common.cbExtract`
 
 
 ### Extract callback
@@ -212,16 +208,16 @@ Returns: boolean
 
 
 ### Distinctly merge multiple arrays
-`common.merge(...args)`
-  - `...args` - array, arrays with elements to be merged
+`common.merge(args)`
+  - `args` - array, arrays with elements to be merged
 
 Returns: array
 
 
 ### Merge multiple objects with merger
-`common.mergeObjects(merger, ...objs)`
+`common.mergeObjects(merger, objs)`
   - `merger:function`
-  - `...objs` - array, objects to be merged
+  - `objs` - array, objects to be merged
 
 Returns: object
 
@@ -230,7 +226,7 @@ Returns: object
 `common.forwardEvents(from, to, events)`
   - `from` - EventEmitter, to listen for event
   - `to` - EventEmitter, to emit event on
-  - `events` - array of strings, string or object, events names
+  - `events` - array of strings, string or object, (optional), events names
 
 Example:
 ```js
@@ -253,19 +249,20 @@ Example:
 ```
 
 
-### Get enhanced EventEmitter with wildcard and forward method
+### Create EnhancedEmitter, enhanced EventEmitter
 `common.emitter()`
 
-Returns: EventEmitter, instance
+with wildcard and forward method
+Returns: EventEmitter instance
 
 
 ### Partially apply arguments to function
-`common.partial(fn, ...args)`
+`common.partial(fn, args)`
   - `fn:function`
-  - `...args` - array, arguments to be applied
+  - `args` - array, arguments to be applied
 
 Returns: function(...rest)
-  ...rest - arguments
+  rest - arguments
 
 
 ### Map object fields with provided function
@@ -277,11 +274,11 @@ Returns: object, with same reference but with transformed fields
 
 
 ### Compose multiple functions into one
-`common.compose(...fns)`
-  - `...fns` - array, functions to be composed
+`common.compose(fns)`
+  - `fns` - array, functions to be composed
 
 Returns: function(...args), composed
-  ...args - array, arguments to be passed to the first function
+  args - array, arguments to be passed to the first function
 
 
 ### Apply given function to value or default value
@@ -294,8 +291,8 @@ Returns: result of `fn` or `defVal`
 
 
 ### Zip several arrays into one
-`common.zip(...arrays)`
-  - `...arrays` - array, arrays to be zipped
+`common.zip(arrays)`
+  - `arrays` - array, arrays to be zipped
 
 Returns: array, length is minimal of input arrays length,
 element with index i of resulting array is array with
@@ -311,31 +308,31 @@ Returns: array, replicated
 
 
 ### Zip arrays using specific function
-`common.zipWith(fn, ...arrays)`
+`common.zipWith(fn, arrays)`
   - `fn:function` - for zipping elements with index i
-  - `...arrays` - array, arrays to be zipped
+  - `arrays` - array, arrays to be zipped
 
 Returns: array, zipped, element with index i of resulting array is result
 of fn called with arguments from arrays
 
 
 ### Curry function until the condition is met
-`common.curryUntil(condition, fn, ...args)`
+`common.curryUntil(condition, fn, args)`
   - `condition:function` - function(argsI, argsParts) returns boolean
     - `argsI` - arguments for i-th currying
     - `argsParts` - array of args given for currying from first to i-th currying
   - `fn:function` - which will be curried
-  - `...args` - array, arguments for fn
+  - `args` - array, arguments for fn
 
 Returns: function(...args), curried
-  ...args - array, arguments
+  args - array, arguments
 
 
 ### Curry fn count times, first curry uses args for first currying
-`common.curryN(fn, count, ...args)`
+`common.curryN(fn, count, args)`
   - `fn:function` - curried
   - `count:number` - of times function should be curried
-  - `...args` - array, arguments for first currying
+  - `args` - array, arguments for first currying
 
 Returns: function, curried given times count
 
@@ -348,19 +345,19 @@ Returns: function, to pass arguments that returns curried fn
 
 
 ### Curry function with given arguments
-`common.curry(fn, ...args)`
+`common.curry(fn, args)`
   - `fn:function` - to be curried
-  - `...args` - array, arguments
+  - `args` - array, arguments
 
 Returns: function, curried
 
 
 ### Apply arguments
-`common.applyArgs(...args)`
-  - `...args` - array, arguments to save in closure
+`common.applyArgs(args)`
+  - `args` - array, arguments to save in closure
 
 Returns: function, to be applied saved arguments
-  ...args - array, arguments saved in closure
+  args - array, arguments saved in closure
 
 
 ### Get first not errored result of fn
@@ -368,17 +365,21 @@ Returns: function, to be applied saved arguments
   - `fn:function` - to be called
 
 Returns: result of `fn(...args)`
-  ...args - array, arguments to iterate
+  args - array, arguments to iterate
 
 Throws: Error, if `fn` throws it
 
 
 ### Rest left, transform function
 `common.restLeft(fn)`
-  - `fn:function` - function(args, arg1..argN, callback)
+  - `fn:function` - function(args, ...namedArgs, callback)
+    - `args` - array, rest of spreadArgs created by excluding namedArgs
+    - `namedArgs` - array, first values of spreadArgs,
+        length is based upon interface of fn
+    - `callback:function` - callback, last argument of spreadArgs
 
-Returns: function(arg1..argN, ...args, callback)
-  ...spreadArgs - array, arguments to be added
+Returns: function(...spreadArgs)
+  spreadArgs - array, arguments to be added
 
 
 ### Generate random key
@@ -397,14 +398,14 @@ Returns: string, GUID
 
 ### Generate random SID
 `common.generateSID(config)`
-  - `config` - record, { length, characters, secret }
+  - `config:object` - { length, characters, secret }
 
 Returns: string, SID
 
 
 ### Calculate SID CRC
 `common.crcSID(config, key)`
-  - `config` - record, { secret }
+  - `config:object` - { secret }
   - `key:string` - SID key
 
 Returns: string, CRC
@@ -412,7 +413,7 @@ Returns: string, CRC
 
 ### Validate SID
 `common.validateSID(config, sid)`
-  - `config` - record, { secret }
+  - `config:object` - { secret }
   - `sid:string` - session id
 
 Returns: boolean
@@ -714,7 +715,7 @@ Example:
 ### Split string by the first occurrence of separator
 `common.section(s, separator)`
   - `s:string`
-  - `separator:string` - or char
+  - `separator:string or char`
 
 Returns: array of strings
 
@@ -860,7 +861,7 @@ Returns: number
   - `fn:function`
 
 Returns: function(...args), wrapped with deprecation warning
-  ...args - array, arguments to be passed to wrapped funtion
+  args - array, arguments to be passed to wrapped function
 
 
 ### Wrap new method to mark old alias as deprecated
@@ -868,7 +869,7 @@ Returns: function(...args), wrapped with deprecation warning
   - `fn:function`
 
 Returns: function,  function(...args), wrapped with deprecation warning
-  ...args - array, arguments to be passed to wrapped function
+  args - array, arguments to be passed to wrapped function
 
 
 ### Make function raise-safe
@@ -876,7 +877,7 @@ Returns: function,  function(...args), wrapped with deprecation warning
   - `fn:function`
 
 Returns: function, wrapped with try/catch interception
-  ...args - array, arguments to be passed to wrapped function
+  args - array, arguments to be passed to wrapped function
 
 ## Contributors
 
