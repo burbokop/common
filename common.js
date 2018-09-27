@@ -21,6 +21,7 @@ const submodules = [
   'enum', // Enumerated type
   'iterator', // Iterator
   'uint64', // Uint64
+  'flags', // Flags data type
 ].map(path => require('./lib/' + path));
 
 module.exports = Object.assign({}, ...submodules);
