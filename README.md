@@ -230,22 +230,22 @@ Returns: object
 
 Example:
 ```js
- common.forwardEvent(from, to);
+ common.forwardEvents(from, to);
 ```
 
 Example:
 ```js
- common.forwardEvent(from, to, 'eventName');
+ common.forwardEvents(from, to, 'eventName');
 ```
 
 Example:
 ```js
- common.forwardEvent(from, to, { eventName: 'newEventName' });
+ common.forwardEvents(from, to, { eventName: 'newEventName' });
 ```
 
 Example:
 ```js
- common.forwardEvent(from, to, ['eventName1', 'eventName2']);
+ common.forwardEvents(from, to, ['eventName1', 'eventName2']);
 ```
 
 
