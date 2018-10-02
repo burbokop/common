@@ -16,24 +16,24 @@ $ npm install metarhia-common
 
 ### Split array into two parts
 `common.splitAt(index, array)`
-  - `index:number` - index defining end of first part and start of second
-  - `array` - array, to be splitted
+  - `index:<number>` - index defining end of first part and start of second
+  - `array` - <array>, to be splitted
 
-Returns: tuple with two parts of the array
+Returns: <array>, tuple with two parts of the array
 
 ### Shuffle an array
 `common.shuffle(arr)`
-  - `arr` - array
+  - `arr` - <array>
 
-Returns: array
+Returns: <array>
 
 
 ### Generate int array from given range
 `common.range(from, to)`
-  - `from:number` - range start
-  - `to:number` - range end
+  - `from:<number>` - range start
+  - `to:<number>` - range end
 
-Returns: array
+Returns: <array>
 
 Example:
 ```js
@@ -43,10 +43,10 @@ Example:
 
 ### Generate int array from sequence syntax
 `common.sequence(seq, max)`
-  - `seq` - array
-  - `max:number` - optional max
+  - `seq` - <array>
+  - `max:<number>` - optional max
 
-Returns: array
+Returns: <array>
 
 Example:
 ```js
@@ -75,7 +75,7 @@ range from..max-to: sequence([81, [-2]], 5) = [81, 82, 83]
 
 ### Get last element of array
 `common.last(arr)`
-  - `arr` - array
+  - `arr` - <array>
 
 Returns: element
 
@@ -89,13 +89,13 @@ Returns: Cache instance
 ### Empty function
 `common.falseness()`
 
-Returns: boolean, always false
+Returns: <boolean>, always false
 
 
 ### Empty function
 `common.trueness()`
 
-Returns: boolean, always true
+Returns: <boolean>, always true
 
 
 ### Empty function
@@ -106,43 +106,43 @@ Returns: always undefined
 
 ### Empty asynchronous callback-last single-argument function
 `common.nop(callback)`
-  - `callback:function` - callback to be called with (null)
+  - `callback:<function>` - callback to be called with (null)
 
 
 ### Empty asynchronous callback-last double-argument function
 `common.noop(empty, callback)`
-  - `empty` - incoming value to be ignored
-  - `callback:function` - callback to be called with (null, null)
+  - `empty` - <any>, incoming value to be ignored
+  - `callback:<function>` - callback to be called with (null, null)
 
 
 ### Wrap function: call once, not null
 `common.once(fn)`
-  - `fn:function` - (optional)
+  - `fn:<function>` - (optional)
 
-Returns: function, wrapped callback
+Returns: <function>, wrapped callback
 
 
 ### Extract callback function
 `common.unsafeCallback(args)`
 
 It's unsafe: may return null, allows multiple calls
-  - `args` - array, arguments
+  - `args` - <array>, arguments
 
-Returns: function, callback or null
+Returns: <function>, callback or null
 
 
 ### Extract callback
 `common.safeCallback(args)`
-  - `args` - array, arguments
+  - `args` - <array>, arguments
 
-Returns: function, callback or common.emptiness if there is no callback
+Returns: <function>, callback or common.emptiness if there is no callback
 
 
 ### Extract callback
 `common.requiredCallback(args)`
-  - `args` - array, arguments
+  - `args` - <array>, arguments
 
-Returns: function, extracted callback
+Returns: <function>, extracted callback
 
 Throws: TypeError, if there is no callback
 
@@ -151,82 +151,82 @@ Throws: TypeError, if there is no callback
 `common.onceCallback(args)`
 
 Wrap callback with once()
-  - `args` - array, arguments
+  - `args` - <array>, arguments
 
-Returns: function, callback or common.emptiness if there is no callback
+Returns: <function>, callback or common.emptiness if there is no callback
 
 
 ### Check if value is scalar
 `common.isScalar(value)`
-  - `value` - scalar value or Object
+  - `value:<object>` - or scalar
 
-Returns: boolean
+Returns: <boolean>
 
 
 ### Copy dataset (copy objects to new array)
 `common.copy(ds)`
-  - `ds` - array of objects, source dataset to be copied
+  - `ds:<object[]>` - source dataset to be copied
 
-Returns: array of objects
+Returns: <object[]>
 
 
 ### Clone object or array
 `common.clone(obj)`
-  - `obj:object or array`
+  - `obj:<object>`
 
-Returns: object or array
+Returns: <object> | <array>
 
 
 ### Duplicate object or array (properly handles prototype and circular links)
 `common.duplicate(obj)`
-  - `obj:object or array`
+  - `obj:<object>`
 
-Returns: object or array
+Returns: <object> | <array>
 
 
 ### Read property by dot-separated path
 `common.getByPath(data, dataPath)`
-  - `data:object`
-  - `dataPath:string` - dot-separated path
+  - `data:<object>`
+  - `dataPath:<string>` - dot-separated path
 
-Returns: any type, value
+Returns: <any>, value
 
 
 ### Set property by dot-separated path
 `common.setByPath(data, dataPath, value)`
-  - `data:object`
-  - `dataPath:string` - dot-separated path
-  - `value` - any type, new value
+  - `data:<object>`
+  - `dataPath:<string>` - dot-separated path
+  - `value` - <any>, new value
 
 
 ### Delete property by dot-separated path
 `common.deleteByPath(data, dataPath)`
-  - `data:object`
-  - `dataPath:string` - dot-separated path
+  - `data:<object>`
+  - `dataPath:<string>` - dot-separated path
 
-Returns: boolean
+Returns: <boolean>
 
 
 ### Distinctly merge multiple arrays
 `common.merge(args)`
-  - `args` - array, arrays with elements to be merged
+  - `args` - <array>, arrays with elements to be merged
 
-Returns: array
+Returns: <array>
 
 
 ### Merge multiple objects with merger
 `common.mergeObjects(merger, objs)`
-  - `merger:function`
-  - `objs` - array, objects to be merged
+  - `merger:<function>`
+  - `objs:<object[]>` - objects to be merged
 
-Returns: object
+Returns: <object>
 
 
 ### Forward events from one EventEmitter to another
 `common.forwardEvents(from, to, events)`
   - `from` - EventEmitter, to listen for event
   - `to` - EventEmitter, to emit event on
-  - `events` - array of strings, string or object, (optional), events names
+  - `events:<string[]>` - string or object, (optional), events names
 
 Example:
 ```js
@@ -258,32 +258,32 @@ Returns: EventEmitter instance
 
 ### Partially apply arguments to function
 `common.partial(fn, args)`
-  - `fn:function`
-  - `args` - array, arguments to be applied
+  - `fn:<function>`
+  - `args` - <array>, arguments to be applied
 
 Returns: function(...rest)
-  rest - arguments
+  rest - <array>, arguments
 
 
 ### Map object fields with provided function
 `common.omap(mapFn, obj)`
-  - `mapFn:function` - to apply to every field value
-  - `obj:object` - which fields used for mapping
+  - `mapFn:<function>` - to apply to every field value
+  - `obj:<object>` - which fields used for mapping
 
-Returns: object, with same reference but with transformed fields
+Returns: <object>, with same reference but with transformed fields
 
 
 ### Compose multiple functions into one
 `common.compose(fns)`
-  - `fns` - array, functions to be composed
+  - `fns` - <array>, functions to be composed
 
 Returns: function(...args), composed
-  args - array, arguments to be passed to the first function
+  args - <array>, arguments to be passed to the first function
 
 
 ### Apply given function to value or default value
 `common.maybe(fn, defVal, value)`
-  - `fn:function`
+  - `fn:<function>`
   - `defVal` - default value
   - `value` - value (optional)
 
@@ -292,16 +292,16 @@ Returns: result of `fn` or `defVal`
 
 ### Zip several arrays into one
 `common.zip(arrays)`
-  - `arrays` - array, arrays to be zipped
+  - `arrays` - <array[]>, arrays to be zipped
 
-Returns: array, length is minimal of input arrays length,
+Returns: <array>, length is minimal of input arrays length,
 element with index i of resulting array is array with
 elements with index i from input arrays
 
 
 ### Create array of replicated values
 `common.replicate(count, elem)`
-  - `count:number` - new array length
+  - `count:<number>` - new array length
   - `elem` - value to replicate
 
 Returns: array, replicated
@@ -309,8 +309,8 @@ Returns: array, replicated
 
 ### Zip arrays using specific function
 `common.zipWith(fn, arrays)`
-  - `fn:function` - for zipping elements with index i
-  - `arrays` - array, arrays to be zipped
+  - `fn:<function>` - for zipping elements with index i
+  - `arrays` - <array[]>, arrays to be zipped
 
 Returns: array, zipped, element with index i of resulting array is result
 of fn called with arguments from arrays
@@ -318,150 +318,150 @@ of fn called with arguments from arrays
 
 ### Curry function until the condition is met
 `common.curryUntil(condition, fn, args)`
-  - `condition:function` - function(argsI, argsParts) returns boolean
-    - `argsI` - arguments for i-th currying
-    - `argsParts` - array of args given for currying from first to i-th currying
-  - `fn:function` - which will be curried
-  - `args` - array, arguments for fn
+  - `condition:<function>` - function(argsI, argsParts) returns boolean
+    - `argsI` - <array>, arguments for i-th currying
+    - `argsParts` - <array>, of args given for currying from first to i-th currying
+  - `fn:<function>` - which will be curried
+  - `args` - <array>, arguments for fn
 
 Returns: function(...args), curried
-  args - array, arguments
+  args - <array>, arguments
 
 
 ### Curry fn count times, first curry uses args for first currying
 `common.curryN(fn, count, args)`
-  - `fn:function` - curried
-  - `count:number` - of times function should be curried
-  - `args` - array, arguments for first currying
+  - `fn:<function>` - curried
+  - `count:<number>` - of times function should be curried
+  - `args` - <array>, arguments for first currying
 
-Returns: function, curried given times count
+Returns: <function>, curried given times count
 
 
 ### Curry function curry with fn
 `common.curryTwice(fn)`
-  - `fn:function` - to be curried
+  - `fn:<function>` - to be curried
 
-Returns: function, to pass arguments that returns curried fn
+Returns: <function>, to pass arguments that returns curried fn
 
 
 ### Curry function with given arguments
 `common.curry(fn, args)`
-  - `fn:function` - to be curried
-  - `args` - array, arguments
+  - `fn:<function>` - to be curried
+  - `args` - <array>, arguments
 
-Returns: function, curried
+Returns: <function>, curried
 
 
 ### Apply arguments
 `common.applyArgs(args)`
-  - `args` - array, arguments to save in closure
+  - `args` - <array>, arguments to save in closure
 
-Returns: function, to be applied saved arguments
-  args - array, arguments saved in closure
+Returns: <function>, to be applied saved arguments
+  args - <array>, arguments saved in closure
 
 
 ### Get first not errored result of fn
 `common.either(fn)`
-  - `fn:function` - to be called
+  - `fn:<function>` - to be called
 
 Returns: result of `fn(...args)`
-  args - array, arguments to iterate
+  args - <array>, arguments to iterate
 
 Throws: Error, if `fn` throws it
 
 
 ### Rest left, transform function
 `common.restLeft(fn)`
-  - `fn:function` - function(args, ...namedArgs, callback)
-    - `args` - array, rest of spreadArgs created by excluding namedArgs
-    - `namedArgs` - array, first values of spreadArgs,
-                    length is based upon interface of fn
-    - `callback:function` - callback, last argument of spreadArgs
+  - `fn:<function>` - function(args, ...namedArgs, callback)
+    - `args` - <array>, rest of spreadArgs created by excluding namedArgs
+    - `namedArgs` - <array>, first values of spreadArgs,
+                  length is based upon interface of fn
+    - `callback:<function>` - callback, last argument of spreadArgs
 
 Returns: function(...spreadArgs)
-  spreadArgs - array, arguments to be added
+  spreadArgs - <array>, arguments to be added
 
 
 ### Generate random key
 `common.generateKey(length, possible)`
-  - `length:number` - key length
-  - `possible:string` - with possible characters
+  - `length:<number>` - key length
+  - `possible:<string>` - with possible characters
 
-Returns: string, key
+Returns: <string>, key
 
 
 ### Generate an RFC4122-compliant GUID (UUID v4)
 `common.generateGUID()`
 
-Returns: string, GUID
+Returns: <string>, GUID
 
 
 ### Generate random SID
 `common.generateSID(config)`
-  - `config:object` - { length, characters, secret }
+  - `config:<object>` - { length, characters, secret }
 
-Returns: string, SID
+Returns: <string>, SID
 
 
 ### Calculate SID CRC
 `common.crcSID(config, key)`
-  - `config:object` - { secret }
-  - `key:string` - SID key
+  - `config:<object>` - { secret }
+  - `key:<string>` - SID key
 
-Returns: string, CRC
+Returns: <string>, CRC
 
 
 ### Validate SID
 `common.validateSID(config, sid)`
-  - `config:object` - { secret }
-  - `sid:string` - session id
+  - `config:<object>` - { secret }
+  - `sid:<string>` - session id
 
-Returns: boolean
+Returns: <boolean>
 
 
 ### Calculate hash with salt
 `common.hash(password, salt)`
-  - `password:string`
-  - `salt:string`
+  - `password:<string>`
+  - `salt:<string>`
 
-Returns: string, hash
+Returns: <string>, hash
 
 
 ### Validate hash
 `common.validateHash(hash, password, salt)`
-  - `hash:string`
-  - `password:string`
-  - `salt:string`
+  - `hash:<string>`
+  - `password:<string>`
+  - `salt:<string>`
 
-Returns: boolean
+Returns: <boolean>
 
 
 ### Generate file storage key
 `common.generateStorageKey()`
 
-Returns: array of strings, [folder1, folder2, code]
+Returns: <string[]>, [folder1, folder2, code]
 
 
 ### Convert id to array of hex strings
 `common.idToChunks(id)`
-  - `id:number`
+  - `id:<number>`
 
-Returns: array, minimal length is 2
-Contains hex strings with length of 4
+Returns: <array>, minimal length is 2
+which contains hex strings with length of 4
 
 
 ### Convert id to file path
 `common.idToPath(id)`
-  - `id:number`
+  - `id:<number>`
 
-Returns: string
+Returns: <string>
 
 
 ### Convert file path to id
 `common.pathToId(path)`
-  - `path:string`
+  - `path:<string>`
 
-Returns: number
+Returns: <number>
 
 
 ### Create prefetcher to use when crypto.randomBytes is required to generate
@@ -469,14 +469,14 @@ Returns: number
 
 multiple same-size values. `bufSize` must be a multiple of `valueSize` for
 this to work.
-  - `bufSize:number` - size in bytes of the buffer to preallocate
-  - `valueSize:number` - size in bytes of the produced chunks
+  - `bufSize:<number>` - size in bytes of the buffer to preallocate
+  - `valueSize:<number>` - size in bytes of the produced chunks
 
 
 ### Generate random integer value in given range
 `common.random(min, max)`
-  - `min:number` - range start
-  - `max:number` - range end
+  - `min:<number>` - range start
+  - `max:<number>` - range end
 
 Returns: number
 
@@ -486,63 +486,63 @@ Returns: number
 
 but not including 1 (same as Math.random),
 but use crypto-secure number generator.
-Returns: number
+Returns: <number>
 
 
 ### List method names
 `common.methods(iface)`
-  - `iface:object` - to be introspected
+  - `iface:<object>` - to be introspected
 
-Returns: array of strings, method names
+Returns: <string[]>, method names
 
 
 ### List property names
 `common.properties(iface)`
-  - `iface:object` - to be introspected
+  - `iface:<object>` - to be introspected
 
-Returns: array of strings, property names
+Returns: <string[]>, property names
 
 
 ### Convert IP string to number
 `common.ipToInt(ip)`
-  - `ip:string` - IP address, default: '127.0.0.1'
+  - `ip:<string>` - IP address, default: '127.0.0.1'
 
-Returns: number
+Returns: <number>
 
 
 ### Get local network interfaces
 `common.localIPs()`
 
-Returns: array of strings
+Returns: <string[]>
 
 
 ### Parse host string
 `common.parseHost(host)`
-  - `host:string` - host or empty string, may contain `:port`
+  - `host:<string>` - host or empty string, may contain `:port`
 
-Returns: string, host without port but not empty
+Returns: <string>, host without port but not empty
 
 
 ### Override method: save old to `fn.inherited`
 `common.override(obj, fn)`
-  - `obj:object` - containing method to override
-  - `fn:function` - name will be used to find method
+  - `obj:<object>` - containing method to override
+  - `fn:<function>` - name will be used to find method
 
 Hint: Previous function will be accessible by obj.fnName.inherited
 
 
 ### Mixin for ES6 classes without overriding existing methods
 `common.mixin(target, source)`
-  - `target:object` - mixin to target
-  - `source:object` - source methods
+  - `target:<object>` - mixin to target
+  - `source:<object>` - source methods
 
 
 ### Compare for array.sort with priority
 `common.sortComparePriority(priority, s1, s2)`
-  - `priority` - array of strings with priority
-  - `s1, s2:string` - to compare
+  - `priority:<string[]>` - with priority
+  - `s1, s2:<string>` - to compare
 
-Returns: number
+Returns: <number>
 
 Example:
 ```js
@@ -552,9 +552,9 @@ Example:
 
 ### Compare for array.sort, directories first
 `common.sortCompareDirectories(a, b)`
-  - `a, b:string` - to compare
+  - `a, b:<string>` - to compare
 
-Returns: number
+Returns: <number>
 
 Example:
 ```js
@@ -564,9 +564,9 @@ Example:
 
 ### Compare for array.sort
 `common.sortCompareByName(a, b)`
-  - `a, b:object` - { name } to compare
+  - `a, b:<object>` - { name } to compare
 
-Returns: number
+Returns: <number>
 
 Example:
 ```js
@@ -576,19 +576,19 @@ Example:
 
 ### Substitute variables
 `common.subst(tpl, data, dataPath, escapeHtml)`
-  - `tpl:string` - template body
-  - `data` - hash, data structure to visualize
-  - `dataPath:string` - current position in data structure
-  - `escapeHtml:boolean` - escape html special characters if true
+  - `tpl:<string>` - template body
+  - `data:<object>` - hash, data structure to visualize
+  - `dataPath:<string>` - current position in data structure
+  - `escapeHtml:<boolean>` - escape html special characters if true
 
-Returns: string
+Returns: <string>
 
 
 ### Escape html characters
 `common.htmlEscape(content)`
-  - `content:string` - to escape
+  - `content:<string>` - to escape
 
-Returns: string
+Returns: <string>
 
 Example:
 ```js
@@ -598,9 +598,9 @@ Example:
 
 ### Extract file extension in lower case with no dot
 `common.fileExt(fileName)`
-  - `fileName:string` - file name
+  - `fileName:<string>` - file name
 
-Returns: string
+Returns: <string>
 
 Example:
 ```js
@@ -615,9 +615,9 @@ Result:
 
 ### Remove file extension from file name
 `common.removeExt(fileName)`
-  - `fileName:string` - file name
+  - `fileName:<string>` - file name
 
-Returns: string
+Returns: <string>
 
 Example:
 ```js
@@ -632,16 +632,16 @@ Result:
 
 ### Convert spinal case to camel case
 `common.spinalToCamel(name)`
-  - `name:string`
+  - `name:<string>`
 
-Returns: string
+Returns: <string>
 
 
 ### Escape regular expression control characters
 `common.escapeRegExp(s)`
-  - `s:string`
+  - `s:<string>`
 
-Returns: string
+Returns: <string>
 
 Example:
 ```js
@@ -651,58 +651,58 @@ Example:
 
 ### Generate escaped regular expression
 `common.newEscapedRegExp(s)`
-  - `s:string`
+  - `s:<string>`
 
 Returns: RegExp, instance
 
 
 ### Add trailing slash at the end if there isn't one
 `common.addTrailingSlash(s)`
-  - `s:string`
+  - `s:<string>`
 
-Returns: string
+Returns: <string>
 
 
 ### Remove trailing slash from string
 `common.stripTrailingSlash(s)`
-  - `s:string`
+  - `s:<string>`
 
-Returns: string
+Returns: <string>
 
 
 ### Get directory name with trailing slash from path
 `common.dirname(filePath)`
-  - `filePath:string`
+  - `filePath:<string>`
 
-Returns: string
+Returns: <string>
 
 
 ### Capitalize string
 `common.capitalize(s)`
-  - `s:string`
+  - `s:<string>`
 
-Returns: string
+Returns: <string>
 
 
 ### Extract substring between prefix and suffix
 `common.between(s, prefix, suffix)`
-  - `s:string` - source
-  - `prefix:string` - before needed fragment
-  - `suffix:string` - after needed fragment
+  - `s:<string>` - source
+  - `prefix:<string>` - before needed fragment
+  - `suffix:<string>` - after needed fragment
 
-Returns: string
+Returns: <string>
 
 
 ### Remove UTF-8 BOM
 `common.removeBOM(s)`
-  - `s:string` - possibly starts with BOM
+  - `s:<string>` - possibly starts with BOM
 
-Returns: string
+Returns: <string>
 
 
 ### Generate RegExp from array with '*' wildcards
 `common.arrayRegExp(items)`
-  - `items` - array of strings
+  - `items:<string[]>`
 
 Returns: RegExp, instance
 
@@ -714,10 +714,10 @@ Example:
 
 ### Split string by the first occurrence of separator
 `common.section(s, separator)`
-  - `s:string`
-  - `separator:string or char`
+  - `s:<string>`
+  - `separator:<string>` - or char
 
-Returns: array of strings
+Returns: <string[]>
 
 Example:
 ```js
@@ -732,10 +732,10 @@ Result:
 
 ### Split string by the last occurrence of separator
 `common.rsection(s, separator)`
-  - `s:string`
-  - `separator:string` - or char
+  - `s:<string>`
+  - `separator:<string>` - or char
 
-Returns: array of strings
+Returns: <string[]>
 
 Example:
 ```js
@@ -750,11 +750,11 @@ Result:
 
 ### Split string by multiple occurrence of separator
 `common.split(s, separator, limit)`
-  - `s:string`
-  - `separator:string (optional)` - default: ','
-  - `limit:number (optional)` - default: -1 max length of result array
+  - `s:<string>`
+  - `separator:<string>` - (optional), default: ','
+  - `limit:<number>` - (optional), default: -1 max length of result array
 
-Returns: array of strings
+Returns: <string[]>
 
 Example:
 ```js
@@ -779,11 +779,11 @@ Result:
 
 ### Split string by multiple occurrences of separator
 `common.rsplit(s, separator, limit)`
-  - `s:string`
-  - `separator:string (optional)` - default: ','
-  - `limit:number (optional)` - default: -1 max length of result array
+  - `s:<string>`
+  - `separator:<string>` - (optional), default: ','
+  - `limit:<number>` - (optional), default: -1 max length of result array
 
-Returns: array of strings
+Returns: <string[]>
 
 Example:
 ```js
@@ -798,8 +798,8 @@ Result:
 
 ### Compare time1 and time2
 `common.isTimeEqual(time1, time2)`
-  - `time1:string` - time or milliseconds
-  - `time2:string` - time or milliseconds
+  - `time1:<string>` - time or milliseconds
+  - `time2:<string>` - time or milliseconds
 
 Returns: boolean
 
@@ -825,9 +825,9 @@ Returns: string
 
 ### Parse duration to seconds
 `common.duration(s)`
-  - `s:string` - duration syntax
+  - `s:<string>` - duration syntax
 
-Returns: number, milliseconds
+Returns: <number>, milliseconds
 
 Example:
 ```js
@@ -837,36 +837,36 @@ Example:
 
 ### Convert integer duration to string
 `common.durationToString(n)`
-  - `n:number` - duration
+  - `n:<number>` - duration
 
-Returns: string
+Returns: <string>
 
 
 ### Convert integer to string, representing data size in Kb, Mb, Gb, and Tb
 `common.bytesToSize(bytes)`
-  - `bytes:number` - size
+  - `bytes:<number>` - size
 
-Returns: string
+Returns: <string>
 
 
 ### Convert string with data size to integer
 `common.sizeToBytes(size)`
-  - `size:string` - size
+  - `size:<string>` - size
 
-Returns: number
+Returns: <number>
 
 
 ### Wrap method to mark it as deprecated
 `common.deprecate(fn)`
-  - `fn:function`
+  - `fn:<function>`
 
 Returns: function(...args), wrapped with deprecation warning
-  args - array, arguments to be passed to wrapped function
+  args - <array>, arguments to be passed to wrapped function
 
 
 ### Wrap new method to mark old alias as deprecated
 `common.alias(fn)`
-  - `fn:function`
+  - `fn:<function>`
 
 Returns: function,  function(...args), wrapped with deprecation warning
   args - array, arguments to be passed to wrapped function
@@ -874,10 +874,10 @@ Returns: function,  function(...args), wrapped with deprecation warning
 
 ### Make function raise-safe
 `common.safe(fn)`
-  - `fn:function`
+  - `fn:<function>`
 
 Returns: function, wrapped with try/catch interception
-  args - array, arguments to be passed to wrapped function
+  args - <array>, arguments to be passed to wrapped function
 
 ## Contributors
 
