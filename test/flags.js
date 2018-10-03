@@ -98,18 +98,18 @@ metatests.test('FlagsClass.unset', test => {
   test.end();
 });
 
-metatests.test('FlagsClass.switch', test => {
+metatests.test('FlagsClass.toggle', test => {
   const Numeri = Flags.from('Uno', 'Due', 'Tre', 'Quatro');
   const num = Numeri.from();
 
-  num.switch('Due');
-  num.switch('Tre');
+  num.toggle('Due');
+  num.toggle('Tre');
 
   test.strictSame(num.get('Due'), 1);
   test.strictSame(num.get('Tre'), 1);
 
-  num.switch('Due');
-  num.switch('Tre');
+  num.toggle('Due');
+  num.toggle('Tre');
 
   test.strictSame(num.get('Due'), 0);
   test.strictSame(num.get('Tre'), 0);
